@@ -22,6 +22,12 @@ public class FieldOfView : MonoBehaviour
     [HideInInspector]
     public List<Transform> visibleTargets = new List<Transform>();
 
+    [Header("Цвет замеченного объекта")]
+    [SerializeField] private Material visibleObjectMaterial;
+
+    [Header("Цвет объекта по умолчанию")]
+    [SerializeField] private Material noVisibleObjectMaterial;
+
     private void Start()
     {
         viewMesh = new Mesh();
@@ -47,6 +53,16 @@ public class FieldOfView : MonoBehaviour
 
     private void FindVisibleTargets()
     {
+        for (int i = 0; i < visibleTargets.Count; i++)
+        {
+            MeshRenderer visibleTargetsMeshRenderer = visibleTargets[i].GetComponent<MeshRenderer>();//.material;
+
+            if (visibleTargetsMeshRenderer.material != noVisibleObjectMaterial)
+            {
+                visibleTargetsMeshRenderer.material = noVisibleObjectMaterial;
+            }
+        }
+
         visibleTargets.Clear();
 
         Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
@@ -63,6 +79,8 @@ public class FieldOfView : MonoBehaviour
                 if(!Physics.Raycast(transform.position, dirToTarget,dstToTarget, obstacleMask))
                 {
                     visibleTargets.Add(target);
+
+                    target.gameObject.GetComponent<MeshRenderer>().material = visibleObjectMaterial;
                 }
             }
         }

@@ -140,6 +140,8 @@ MonoBehaviour:
   edgeDstThreshold: 0.5
   viewMeshFilter: {fileID: 2839719942150952280}
   visibleTargets: []
+  visibleObjectMaterial: {fileID: 2100000, guid: 7c1e119a6c47474439aef248543ff902, type: 2}
+  noVisibleObjectMaterial: {fileID: 2100000, guid: 4b26ee393d2eafd4f845715a0e7c02af, type: 2}
 --- !u!1 &4896872127413214751
 GameObject:
   m_ObjectHideFlags: 0
